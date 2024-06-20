@@ -4,9 +4,6 @@ variable "proxmox_node" {
 variable "image_name" {
   type = string
 }
-variable "image_version" {
-  type = string
-}
 variable "image_description" {
   type    = string
   default = ""
