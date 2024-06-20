@@ -4,3 +4,6 @@ variable "vm_image" {
 variable "storage_pool" {
   type = string
 }
+variable "admin_password" {
+  type = string
+}

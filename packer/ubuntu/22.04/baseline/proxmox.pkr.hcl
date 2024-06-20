@@ -37,7 +37,7 @@ source "proxmox-iso" "ubuntu" {
   ssh_port               = 22
   qemu_agent             = true
   template_description   = var.image_description
-  template_name          = "${var.image_name}-${var.image_version}"
+  template_name          = var.image_name
   unmount_iso            = true
 
 }

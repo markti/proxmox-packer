@@ -1,3 +1,5 @@
 **/.debug.sh
 **/.terraform*
 */*.tfstate*
+**/.debug.pkrvars.hcl
+**/.debug.tfvars

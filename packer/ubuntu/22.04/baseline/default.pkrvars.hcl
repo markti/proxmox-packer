@@ -1,6 +1,5 @@
 iso_file           = "synology-lab:iso/ubuntu-22.04.1-live-server-amd64.iso"
 iso_storage_pool   = "synology-lab"
-image_name         = "u2204-baseline"
-image_version      = "1.0.0"
+image_name         = "u2204-baseline-v1.0.0"
 image_storage_pool = "local-lvm"
 proxmox_node       = "pve"

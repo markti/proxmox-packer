@@ -12,3 +12,7 @@ Environment Variables:
 - PROXMOX_URL
 - PROXMOX_USERNAME
 - PROXMOX_TOKEN
+
+## Minecraft
+
+sudo screen -r mcserver/mcbedrock

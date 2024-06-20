@@ -1,0 +1,7 @@
+#cloud-config
+write_files:
+  - path: /home/mcserver/minecraft_bedrock/server.properties
+    content: |
+      ${server_properties_content}
+    owner: mcserver:mcserver
+    permissions: '0644'
