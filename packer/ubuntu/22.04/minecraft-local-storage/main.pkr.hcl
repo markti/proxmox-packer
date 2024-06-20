@@ -35,6 +35,15 @@ build {
     ]
   }
 
+  # This package will allow us to mount a share drive that we can use to backup server data
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "apt-get update",
+      "apt-get -y install cifs-utils"
+    ]
+  }
+
   # We use the grep package to extract the correct download link from the page we grabbed using curl.
   provisioner "shell" {
     execute_command = local.execute_command
@@ -148,6 +157,40 @@ build {
     inline = [
       "cp /tmp/allowlist.json /home/mcserver/minecraft_bedrock/",
       "chmod +rX /home/mcserver/minecraft_bedrock/allowlist.json"
+    ]
+  }
+
+  # Backup Minecraft Script
+  provisioner "file" {
+    source = "./files/backup_minecraft.sh"
+    destination = "/tmp/backup_minecraft.sh"
+  }
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "cp /tmp/backup_minecraft.sh /home/mcserver/minecraft_bedrock/",
+      "chmod +rX /home/mcserver/minecraft_bedrock/backup_minecraft.sh"
+    ]
+  }
+
+  # Upgrade Minecraft Script
+  provisioner "file" {
+    source = "./files/upgrade_minecraft.sh"
+    destination = "/tmp/upgrade_minecraft.sh"
+  }
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "cp /tmp/upgrade_minecraft.sh /home/mcserver/minecraft_bedrock/",
+      "chmod +rX /home/mcserver/minecraft_bedrock/upgrade_minecraft.sh"
+    ]
+  }
+
+  # add CIFS mount
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "echo '//[file_server]/[share_name] /mnt/[share_path] cifs username=[share_username],password=[share_password],uid=1000,gid=1000 0 0' | sudo tee -a /etc/fstab"
     ]
   }
 
