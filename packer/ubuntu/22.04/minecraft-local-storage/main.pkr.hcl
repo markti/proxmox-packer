@@ -112,6 +112,45 @@ build {
     ]
   }
 
+  # Server Properties
+  provisioner "file" {
+    source = "./files/server.properties"
+    destination = "/tmp/server.properties"
+  }
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "cp /tmp/server.properties /home/mcserver/minecraft_bedrock/",
+      "chmod +rX /home/mcserver/minecraft_bedrock/server.properties"
+    ]
+  }
+
+  # Permissions
+  provisioner "file" {
+    source = "./files/permissions.json"
+    destination = "/tmp/permissions.json"
+  }
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "cp /tmp/permissions.json /home/mcserver/minecraft_bedrock/",
+      "chmod +rX /home/mcserver/minecraft_bedrock/permissions.json"
+    ]
+  }
+
+  # Allow List
+  provisioner "file" {
+    source = "./files/allowlist.json"
+    destination = "/tmp/allowlist.json"
+  }
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "cp /tmp/allowlist.json /home/mcserver/minecraft_bedrock/",
+      "chmod +rX /home/mcserver/minecraft_bedrock/allowlist.json"
+    ]
+  }
+
   # Minecraft systemctl service
   provisioner "file" {
     source = "./files/mcbedrock.service"
