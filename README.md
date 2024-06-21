@@ -16,3 +16,5 @@ Environment Variables:
 ## Minecraft
 
 sudo screen -r mcserver/mcbedrock
+
+https://minecraft.fandom.com/wiki/Server.properties#Default_contents

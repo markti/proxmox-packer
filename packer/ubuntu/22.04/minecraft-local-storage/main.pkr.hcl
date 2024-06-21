@@ -190,7 +190,31 @@ build {
   provisioner "shell" {
     execute_command = local.execute_command
     inline = [
-      "echo '//[file_server]/[share_name] /mnt/[share_path] cifs username=[share_username],password=[share_password],uid=1000,gid=1000 0 0' | sudo tee -a /etc/fstab"
+      "echo '//${var.file_server}/${var.share_name} ${var.share_path} cifs username=${var.share_username},password=${var.share_password},uid=1000,gid=1000 0 0' | sudo tee -a /etc/fstab"
+    ]
+  }
+
+  # Minecraft Settings
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "sed -i 's/\\[server_name\\]/${var.minecraft_server_name}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[game_mode\\]/${var.minecraft_game_mode}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[difficulty\\]/${var.minecraft_difficulty}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[allow_cheats\\]/${var.minecraft_allow_cheats}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[max_players\\]/${var.minecraft_max_players}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[allow_list\\]/${var.minecraft_allow_list}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[level_name\\]/${var.minecraft_level_name}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[level_seed\\]/${var.minecraft_level_seed}/g' /home/mcserver/minecraft_bedrock/server.properties",
+      "sed -i 's/\\[default_player_permission_level\\]/${var.minecraft_detault_permission_level}/g' /home/mcserver/minecraft_bedrock/server.properties"
+    ]
+  }
+
+  # Minecraft Permissions
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "sed -i 's/\\[admin_xuid\\]/${var.minecraft_operator}/g' /home/mcserver/minecraft_bedrock/permissions.json",
     ]
   }
 

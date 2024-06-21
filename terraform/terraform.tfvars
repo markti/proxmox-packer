@@ -1,2 +1,2 @@
-vm_image     = "u2204-minecraft-local-storage-1.0.0"
+vm_image     = "u2204-minecraft-local-storage-v1.0.2"
 storage_pool = "local-lvm"
