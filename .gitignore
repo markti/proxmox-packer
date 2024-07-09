@@ -3,3 +3,5 @@
 */*.tfstate*
 **/.debug.pkrvars.hcl
 **/.debug.tfvars
+**/terraform.tfstate
+**/terraform.tfstate*
