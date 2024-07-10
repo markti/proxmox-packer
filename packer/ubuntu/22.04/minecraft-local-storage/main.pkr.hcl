@@ -89,7 +89,7 @@ build {
     inline = [
       "DOWNLOAD_URL=$(curl -H \"Accept-Encoding: identity\" -H \"Accept-Language: en\" -s -L -A \"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; BEDROCK-UPDATER)\" https://minecraft.net/en-us/download/server/bedrock/ |  grep -o 'https://minecraft.azureedge.net/bin-linux/[^\"]*')",
       "wget $DOWNLOAD_URL -O /home/mcserver/minecraft_bedrock/bedrock-server.zip",
-      "unzip /home/mcserver/minecraft_bedrock/bedrock-server.zip -d /home/mcserver/minecraft_bedrock/",
+      "unzip -q /home/mcserver/minecraft_bedrock/bedrock-server.zip -d /home/mcserver/minecraft_bedrock/",
       "rm /home/mcserver/minecraft_bedrock/bedrock-server.zip",
       "chown -R mcserver: /home/mcserver/"
       ]
@@ -215,6 +215,19 @@ build {
     execute_command = local.execute_command
     inline = [
       "sed -i 's/\\[admin_xuid\\]/${var.minecraft_operator}/g' /home/mcserver/minecraft_bedrock/permissions.json",
+    ]
+  }
+
+  # Setup Minecraft Upgrade CRON Job
+  provisioner "file" {
+    source = "./files/create_upgrade_cron.sh"
+    destination = "/tmp/create_upgrade_cron.sh"
+  }
+  provisioner "shell" {
+    execute_command = local.execute_command
+    inline = [
+      "chmod +x /tmp/create_upgrade_cron.sh",
+      "/tmp/create_upgrade_cron.sh"
     ]
   }
 

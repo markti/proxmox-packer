@@ -1,7 +1,7 @@
 source_image_name      = "u2204-baseline-with-updates-v2024-06-20"
 image_storage_pool     = "local-lvm"
 proxmox_node           = "pve"
-destination_image_name = "u2204-minecraft-local-storage-v1.0.2"
+destination_image_name = "u2204-minecraft-local-storage-v1.0.3"
 share_name             = "minecraft"
 share_path             = "/mnt/minecraft"
 minecraft_server_name  = "Terracraft"
